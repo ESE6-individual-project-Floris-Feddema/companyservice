@@ -58,6 +58,7 @@ func (controller CompanyController) Create(c *gin.Context){
 	insertValue := Company{
 		Name:  createCompany.Name,
 		Owner: createCompany.Owner,
+		Users: []string{},
 	}
 
 	service := services.CompanyService{}
@@ -112,3 +113,17 @@ func (controller CompanyController) Delete(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, nil)
 }
+
+//func (controller CompanyController) GetALlUser(c *gin.Context) {
+//	id := c.Param("id")
+//	objectId, err := primitive.ObjectIDFromHex(id)
+//	if err != nil {
+//		c.JSON(http.StatusBadRequest, err.Error())
+//	}
+//	service := services.CompanyService{}
+//	companies, err := service.FindAllUser(objectId)
+//	if err != nil {
+//		c.JSON(http.StatusBadRequest, err.Error())
+//	}
+//	c.JSON(http.StatusOK, companies)
+//}

@@ -32,7 +32,6 @@ COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 COPY --from=builder /app/main .
 COPY --from=builder /app/.env .
-COPY --from=builder /usr/local/bin/curl /curl
 
 USER appuser:appuser
 

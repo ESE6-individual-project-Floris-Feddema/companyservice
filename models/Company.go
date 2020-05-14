@@ -6,25 +6,29 @@ import (
 
 type CompanyModel struct {
 	Name	string 				`bson:"name"`
-	Owner	string				`bson:"owner"`
+	Owner	User				`bson:"owner"`
+	Users   []User  			`bson:"users"`
 }
 
 type Company struct {
 	ID		primitive.ObjectID	`bson:"_id"`
 	Name	string 				`bson:"name"`
-	Owner	string				`bson:"owner"`
+	Owner	User				`bson:"owner"`
+	Users   []User  			`bson:"users"`
 }
 
 type CompanyDTO struct {
-	Id    string `json:"id"`
-	Name  string `json:"name"`
-	Owner string `json:"owner"`
+	Id    	string 				`json:"id"`
+	Name  	string 				`json:"name"`
+	Owner 	User 				`json:"owner"`
+	Users 	[]User  			`json:"users"`
 }
 
 func (c Company) Model() CompanyModel {
 	model := CompanyModel{
 		Name:  c.Name,
 		Owner: c.Owner,
+		Users: c.Users,
 	}
 	return model
 }
@@ -34,6 +38,7 @@ func (c Company) DTO() CompanyDTO {
 		Id:    c.ID.Hex(),
 		Name: c.Name,
 		Owner: c.Owner,
+		Users: c.Users,
 	}
 	return dto
 }

@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Get configuration
+        run: gpg --quiet --batch --yes --passphrase="${{ secrets.GPG_PASSPHRASE }}" --output ./config.env --decrypt ./config.env.gpg
+
       - name: Set up Go 1.13
         uses: actions/setup-go@v1
         with:

@@ -94,3 +94,17 @@ func (repository CompanyRepository) Update(id primitive.ObjectID, company Compan
 	return returnValue, err
 }
 
+//func (repository CompanyRepository) FindAllUser(id primitive.ObjectID) ([]*Company, error) {
+//	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+//	collection := GetCollection(ctx)
+//
+//	filter := bson.D{}
+//
+//	result, err := collection.Find(ctx, filter)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//
+//}
+

@@ -6,6 +6,6 @@ import (
 )
 
 func EnvVar(key string) string {
-	godotenv.Load(".env")
+	godotenv.Load("config.env")
 	return os.Getenv(key)
 }

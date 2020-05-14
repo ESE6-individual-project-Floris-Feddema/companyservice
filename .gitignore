@@ -202,4 +202,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+config.env
+
 # End of https://www.gitignore.io/api/go,osx,linux,macos,windows,jetbrains,visualstudiocode
