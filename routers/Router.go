@@ -22,4 +22,6 @@ func setRoutes(router *gin.Engine) {
 	router.GET("/company/:id", companyController.GetOne)
 	router.PUT("/company/:id", companyController.Update)
 	router.DELETE("/company/:id", companyController.Delete)
+	router.GET("/user/:id", companyController.GetALlUser)
+	router.POST("/user/:id", companyController.AddUser)
 }
