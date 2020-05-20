@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webservice
+  name: companyservice
   namespace: plandar-development
   labels:
-    app: webservice
+    app: companyservice
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: webservice
+      app: companyservice
   template:
     metadata:
       labels:
-        app: webservice
+        app: companyservice
     spec:
       containers:
       - image: docker.pkg.github.com/ese6-individual-project-floris-feddema/companyservice/companyservice
