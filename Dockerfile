@@ -1,17 +1,5 @@
 FROM golang:alpine AS builder
 
-ENV USER=appuser
-ENV UID=10001
-
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    "${USER}"
-
 RUN mkdir /app
 ADD . /app/
 WORKDIR /app
@@ -25,11 +13,6 @@ FROM scratch
 
 #ENV GIN_MODE=release
 
-COPY --from=builder /etc/passwd /etc/passwd
-COPY --from=builder /etc/group /etc/group
 COPY --from=builder /app/main .
 COPY --from=builder /app/config.env .
-
-USER appuser:appuser
-
 CMD ["/main"]
