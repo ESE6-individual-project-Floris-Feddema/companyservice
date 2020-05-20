@@ -1,7 +1,5 @@
 FROM golang:alpine AS builder
 
-RUN apk update & apk add git tzdata
-
 ENV USER=appuser
 ENV UID=10001
 
@@ -27,7 +25,6 @@ FROM scratch
 
 ENV GIN_MODE=release
 
-COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 COPY --from=builder /app/main .
