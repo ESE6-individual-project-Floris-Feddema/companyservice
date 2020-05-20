@@ -1,9 +1,10 @@
 name: Go
 
-on: [push]
+on:
+  push:
+    branches: [develop]
 
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-18.04
@@ -33,3 +34,18 @@ jobs:
 
       - name: Test
         run: go test -v .
+  deliver:
+    needs: build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      # Deliver Docker image to Github packages
+      - name: Deliver Docker image
+        env:
+          CONTAINER_IMAGE: docker.pkg.github.com/ese6-individual-project-floris-feddema/companyservice/companyservice:${{ github.sha }}
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}"| docker login docker.pkg.github.com -u ${{ secrets.DOCKER_GITHUB_USERNAME }} --password-stdin
+          docker build -t $CONTAINER_IMAGE .
+          docker push $CONTAINER_IMAGE
