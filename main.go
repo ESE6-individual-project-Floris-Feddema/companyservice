@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	router := routers.InitRoute()
 	port := utils.EnvVar("SERVER_PORT")
 	router.Run(":" + port)
