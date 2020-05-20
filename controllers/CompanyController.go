@@ -21,7 +21,7 @@ func (controller CompanyController) GetAll(c *gin.Context) {
 	}
 
 	var returnValue []CompanyDTO
-	for _, element := range companies  {
+	for _, element := range companies {
 		returnValue = append(returnValue, element.DTO())
 	}
 
@@ -46,7 +46,7 @@ func (controller CompanyController) GetOne(c *gin.Context) {
 	c.JSONP(http.StatusOK, company.DTO())
 }
 
-func (controller CompanyController) Create(c *gin.Context){
+func (controller CompanyController) Create(c *gin.Context) {
 
 	var createCompany views.CreateCompany
 
@@ -58,6 +58,7 @@ func (controller CompanyController) Create(c *gin.Context){
 	insertValue := Company{
 		Name:  createCompany.Name,
 		Owner: createCompany.Owner,
+		Users: []User{},
 	}
 
 	service := services.CompanyService{}
@@ -70,7 +71,7 @@ func (controller CompanyController) Create(c *gin.Context){
 	c.JSON(http.StatusCreated, company.DTO())
 }
 
-func (controller CompanyController) Update(c *gin.Context){
+func (controller CompanyController) Update(c *gin.Context) {
 	id := c.Param("id")
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -111,4 +112,40 @@ func (controller CompanyController) Delete(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, nil)
+}
+
+func (controller CompanyController) GetALlUser(c *gin.Context) {
+	id := c.Param("id")
+	service := services.CompanyService{}
+	companies, err := service.FindAllUser(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+	}
+	c.JSON(http.StatusOK, companies)
+}
+
+func (controller CompanyController) AddUser(c *gin.Context){
+	id := c.Param("id")
+
+	objectId, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	var user User
+	if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	service := services.CompanyService{}
+	err = service.AddUser(objectId, user)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	c.Status(http.StatusCreated)
 }

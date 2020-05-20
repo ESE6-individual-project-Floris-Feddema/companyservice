@@ -8,8 +8,8 @@ import (
 	"log"
 )
 
-var collection *mongo.Collection = nil;
-var client *mongo.Client = nil;
+var collection *mongo.Collection = nil
+var client *mongo.Client = nil
 
 func GetCollection(ctx context.Context) *mongo.Collection {
 	if collection != nil {

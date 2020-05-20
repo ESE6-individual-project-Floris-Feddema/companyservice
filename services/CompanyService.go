@@ -39,3 +39,15 @@ func (service CompanyService) Update(id primitive.ObjectID, company Company) (*C
 	return returnValue, err
 
 }
+
+func (service CompanyService) FindAllUser(id string) ([]*Company, error) {
+	repository := repositories.CompanyRepository{}
+	returnValue, err := repository.FindAllUser(id)
+	return returnValue, err
+}
+
+func (service CompanyService) AddUser(id primitive.ObjectID, user User) error {
+	repository := repositories.CompanyRepository{}
+	err := repository.AddUser(id, user)
+	return err
+}

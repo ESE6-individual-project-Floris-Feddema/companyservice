@@ -1,6 +1,8 @@
 package views
 
+import . "companyservice/models"
+
 type CreateCompany struct {
-	Name  string	`json:"name"`
-	Owner string 	`json:"owner"`
+	Name  string `json:"name"`
+	Owner User   `json:"owner"`
 }

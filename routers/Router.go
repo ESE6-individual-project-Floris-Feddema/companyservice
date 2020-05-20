@@ -16,13 +16,12 @@ func InitRoute() *gin.Engine {
 }
 
 func setRoutes(router *gin.Engine) {
-	healthController := new(controllers.HealthController)
-	router.GET("/health", healthController.GetHealth)
-
 	companyController := new(controllers.CompanyController)
 	router.GET("/company", companyController.GetAll)
 	router.POST("/company", companyController.Create)
 	router.GET("/company/:id", companyController.GetOne)
 	router.PUT("/company/:id", companyController.Update)
 	router.DELETE("/company/:id", companyController.Delete)
+	router.GET("/user/:id", companyController.GetALlUser)
+	router.POST("/user/:id", companyController.AddUser)
 }
