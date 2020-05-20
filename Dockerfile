@@ -1,6 +1,6 @@
 FROM golang:alpine AS builder
 
-RUN apk update & apk add --no-cache git tzdata
+RUN apk update & apk add git tzdata
 
 ENV USER=appuser
 ENV UID=10001
