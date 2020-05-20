@@ -7,4 +7,4 @@ services:
     container_name: companyservice
     restart: unless-stopped
     ports:
-      - "4999:4999"
+      - "80:80"
