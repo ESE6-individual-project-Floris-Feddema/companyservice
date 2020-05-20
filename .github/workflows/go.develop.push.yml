@@ -81,7 +81,7 @@ jobs:
           namespace: plandar-development
           container-registry-url: docker.pkg.github.com
           container-registry-username: ${{ secrets.DOCKER_GITHUB_USERNAME }}
-          container-registry-password: ${{ secrets.DOCKER_PASSWORD }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           secret-name: github-docker-registry
 
       - uses: Azure/k8s-deploy@v1
