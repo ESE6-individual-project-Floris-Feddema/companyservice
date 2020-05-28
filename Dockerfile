@@ -7,12 +7,11 @@ WORKDIR /app
 RUN go mod download
 RUN go mod verify
 
+##ENV GIN_MODE=release
+
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+#RUN go build -o main .
 
-FROM scratch
+EXPOSE 80
 
-#ENV GIN_MODE=release
-
-COPY --from=builder /app/main .
-COPY --from=builder /app/config.env .
-CMD ["/main"]
+CMD ["./main"]
