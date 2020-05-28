@@ -1,8 +1,8 @@
 package models
 
 type User struct {
-	UserId string `bson:"userId"`
-	Name   string `bson:"name"`
+	UserId string `json:"userId" bson:"userId"`
+	Name   string `json:"name" bson:"name"`
 }
 
 type UserDTO struct {

@@ -19,7 +19,7 @@ jobs:
         id: go
 
       - name: Get configuration
-        run: gpg --quiet --batch --yes --passphrase="${{ secrets.GPG_PASSPHRASE }}" --output config.env --decrypt config.env.gpg
+        run: gpg --quiet --batch --yes --passphrase="${{ secrets.GPG_PASSPHRASE }}" --output config.env --decrypt config.development.env.gpg
 
       - name: Get dependencies
         run: |
