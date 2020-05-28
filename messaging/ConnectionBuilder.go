@@ -9,6 +9,7 @@ func AddMessageConsumer(connectionUrl string, queueName string, handlers map[str
 		messageHandlers: map[string]MessageHandler{},
 	}
 	for key, element := range handlers {
+		log.Printf("[AMQP] Found handler for %v", key)
 		messageBuilder.WithHandler(element, key)
 	}
 

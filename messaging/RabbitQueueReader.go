@@ -27,6 +27,7 @@ func StartAsync(queue string, builder Builder) error {
 		log.Fatal(err)
 	}
 
+	log.Printf("[AMQP] Started consuming messages on %v", queue)
 	forever := make(chan bool)
 	go func() {
 		for message := range messages {
