@@ -51,3 +51,9 @@ func (service CompanyService) AddUser(id primitive.ObjectID, user User) error {
 	err := repository.AddUser(id, user)
 	return err
 }
+
+func (service CompanyService) UpdateUser(user User) error {
+	repository := repositories.CompanyRepository{}
+	err := repository.UpdateUser(user)
+	return err
+}

@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	. "companyservice/contexts"
 	. "companyservice/models"
+	. "companyservice/repositories/contexts"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -138,4 +138,24 @@ func (repository CompanyRepository) AddUser(id primitive.ObjectID, user User) er
 	company.Users = append(company.Users, user)
 	_, err = collection.UpdateOne(ctx, bson.M{"_id": id}, bson.D{{"$set", company}})
 	return err
+}
+
+func (repository CompanyRepository) UpdateUser(user User) error {
+	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+	collection := GetCollection(ctx)
+
+	_, err := collection.UpdateMany(ctx,
+		bson.M{"owner.userId": user.UserId},
+		bson.D{{"$set", bson.M{"owner.name": user.Name}}})
+	if err != nil {
+		return err
+	}
+
+	_, err = collection.UpdateMany(ctx,
+		bson.M{"users.userId": user.UserId},
+		bson.D{{"$set", bson.M{"users.name": user.Name}}})
+	if err != nil {
+		return err
+	}
+	return nil
 }

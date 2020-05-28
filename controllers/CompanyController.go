@@ -2,8 +2,8 @@ package controllers
 
 import (
 	. "companyservice/models"
+	"companyservice/models/views"
 	"companyservice/services"
-	"companyservice/views"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"net/http"
