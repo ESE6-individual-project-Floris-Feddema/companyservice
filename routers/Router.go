@@ -3,10 +3,16 @@ package routers
 import (
 	"companyservice/controllers"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 )
 
 func InitRoute() *gin.Engine {
 	router := gin.New()
+
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true
+
+	router.Use(cors.New(corsConfig))
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
