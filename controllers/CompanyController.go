@@ -25,7 +25,7 @@ func (controller CompanyController) GetAll(c *gin.Context) {
 		returnValue = append(returnValue, element.DTO())
 	}
 
-	c.JSONP(http.StatusOK, returnValue)
+	c.JSON(http.StatusOK, returnValue)
 }
 
 func (controller CompanyController) GetOne(c *gin.Context) {
@@ -43,7 +43,7 @@ func (controller CompanyController) GetOne(c *gin.Context) {
 		return
 	}
 
-	c.JSONP(http.StatusOK, company.DTO())
+	c.JSON(http.StatusOK, company.DTO())
 }
 
 func (controller CompanyController) Create(c *gin.Context) {
@@ -121,7 +121,13 @@ func (controller CompanyController) GetALlUser(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
 	}
-	c.JSON(http.StatusOK, companies)
+
+	var returnValue []CompanyDTO
+	for _, element := range companies {
+		returnValue = append(returnValue, element.DTO())
+	}
+
+	c.JSON(http.StatusOK, returnValue)
 }
 
 func (controller CompanyController) AddUser(c *gin.Context){
