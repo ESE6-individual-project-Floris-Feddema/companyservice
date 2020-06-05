@@ -10,6 +10,7 @@ func InitRoute() *gin.Engine {
 	router := gin.New()
 
 	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowMethods = []string{"PUT", "PATCH", "POST", "GET" ,"DELETE"}
 	corsConfig.AllowAllOrigins = true
 
 	router.Use(cors.New(corsConfig))
