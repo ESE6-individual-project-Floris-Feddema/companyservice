@@ -86,12 +86,12 @@ func (repository CompanyRepository) Update(id primitive.ObjectID, company Compan
 	}
 	company.Users = oldCompany.Users
 
-	result, err := collection.UpdateOne(ctx, bson.M{"_id": id}, bson.D{{"$set", company}})
+	_, err = collection.UpdateOne(ctx, bson.M{"_id": id}, bson.D{{"$set", company}})
 	if err != nil {
 		return nil, err
 	}
 
-	returnValue, err := repository.FindOne(result.UpsertedID.(primitive.ObjectID))
+	returnValue, err := repository.FindOne(company.ID)
 	if err != nil {
 		return nil, err
 	}
