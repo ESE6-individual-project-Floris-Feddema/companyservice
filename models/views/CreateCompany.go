@@ -1,6 +1,8 @@
 package views
 
-import . "companyservice/models"
+import (
+	. "companyservice/models"
+)
 
 type CreateCompany struct {
 	Name  string `json:"name"`

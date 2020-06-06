@@ -79,6 +79,13 @@ func (repository CompanyRepository) Update(id primitive.ObjectID, company Compan
 	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
 	collection := GetCollection(ctx)
 
+	var oldCompany Company
+	err := collection.FindOne(ctx, bson.M{"_id": id}).Decode(&oldCompany)
+	if err != nil {
+		return nil, err
+	}
+	company.Users = oldCompany.Users
+
 	result, err := collection.UpdateOne(ctx, bson.M{"_id": id}, bson.D{{"$set", company}})
 	if err != nil {
 		return nil, err
