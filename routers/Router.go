@@ -30,5 +30,5 @@ func setRoutes(router *gin.Engine) {
 	router.DELETE("/company/:id", companyController.Delete)
 	router.GET("/user/:id", companyController.GetALlUser)
 	router.POST("/user/:id", companyController.AddUser)
-	router.DELETE("/user/:id", companyController.DeleteUser)
+	router.DELETE("/user/:id/:userid", companyController.DeleteUser)
 }

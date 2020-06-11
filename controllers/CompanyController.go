@@ -158,6 +158,7 @@ func (controller CompanyController) AddUser(c *gin.Context) {
 
 func (controller CompanyController) DeleteUser(c *gin.Context) {
 	id := c.Param("id")
+	userid := c.Param("userid")
 
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -166,7 +167,7 @@ func (controller CompanyController) DeleteUser(c *gin.Context) {
 	}
 
 	service := services.CompanyService{}
-	err = service.DeleteUser(objectId)
+	err = service.DeleteUser(objectId, userid)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
