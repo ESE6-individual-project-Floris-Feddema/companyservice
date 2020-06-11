@@ -4,6 +4,7 @@ import (
 	. "companyservice/models"
 	.  "companyservice/repositories/contexts"
 	"context"
+	"errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
@@ -140,6 +141,16 @@ func (repository CompanyRepository) AddUser(id primitive.ObjectID, user User) er
 	company, err := repository.FindOne(id)
 	if err != nil {
 		return err
+	}
+
+	if user.UserId == company.Owner.UserId {
+		return errors.New("this user is already in the company")
+	}
+
+	for _, n := range company.Users {
+		if user.UserId == n.UserId {
+			return errors.New("this user is already in the company")
+		}
 	}
 
 	company.Users = append(company.Users, user)
