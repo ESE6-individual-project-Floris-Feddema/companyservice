@@ -16,12 +16,12 @@ func StartAsync(queue string, builder Builder) error {
 
 	messages, err := channel.Consume(
 		queue, // queue
-		"",               // consumer
-		false,             // auto-ack
-		false,            // exclusive
-		false,            // no-local
-		false,            // no-wait
-		nil,              // args
+		"",    // consumer
+		false, // auto-ack
+		false, // exclusive
+		false, // no-local
+		false, // no-wait
+		nil,   // args
 	)
 	if err != nil {
 		log.Fatal(err)

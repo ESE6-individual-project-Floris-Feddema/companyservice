@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-type UserChangedHandler struct {}
+type UserChangedHandler struct{}
 
 func (handler UserChangedHandler) HandleMessageAsync(body []byte) {
 	data := models.User{}
@@ -16,8 +16,6 @@ func (handler UserChangedHandler) HandleMessageAsync(body []byte) {
 		log.Fatal(err)
 	}
 
-	service :=  services.CompanyService{}
+	service := services.CompanyService{}
 	_ = service.UpdateUser(data)
 }
-
-

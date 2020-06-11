@@ -4,15 +4,14 @@ import (
 	"github.com/streadway/amqp"
 )
 
-type RabbitConnectionFactory struct{
+type RabbitConnectionFactory struct {
 }
 
 var connection *amqp.Connection
 
-
 func (connectionFactory RabbitConnectionFactory) GetConnection(connectionString string) (*amqp.Connection, error) {
 	if connection != nil {
-		 return connection, nil
+		return connection, nil
 	}
 
 	var err error

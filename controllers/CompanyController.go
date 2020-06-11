@@ -130,7 +130,7 @@ func (controller CompanyController) GetALlUser(c *gin.Context) {
 	c.JSON(http.StatusOK, returnValue)
 }
 
-func (controller CompanyController) AddUser(c *gin.Context){
+func (controller CompanyController) AddUser(c *gin.Context) {
 	id := c.Param("id")
 
 	objectId, err := primitive.ObjectIDFromHex(id)
@@ -147,6 +147,27 @@ func (controller CompanyController) AddUser(c *gin.Context){
 
 	service := services.CompanyService{}
 	err = service.AddUser(objectId, user)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	c.Status(http.StatusCreated)
+}
+
+func (controller CompanyController) DeleteUser(c *gin.Context) {
+	id := c.Param("id")
+	userid := c.Param("userid")
+
+	objectId, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	service := services.CompanyService{}
+	err = service.DeleteUser(objectId, userid)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err.Error())
