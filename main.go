@@ -20,10 +20,10 @@ func main() {
 	port := utils.EnvVar("SERVER_PORT")
 
 	server := &http.Server{
-		Addr:              ":" + port,
-		Handler:           router,
-		ReadTimeout:       5 * time.Second,
-		WriteTimeout:      10 * time.Second,
+		Addr:         ":" + port,
+		Handler:      router,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
 	}
 
 	handlers := map[string]messaging.MessageHandler{}
@@ -39,7 +39,7 @@ func main() {
 		log.Print("[HTTP] Started HTTP server")
 		err := server.ListenAndServe()
 		if err != nil && err != http.ErrServerClosed {
-			 log.Fatal(err)
+			log.Fatal(err)
 		}
 		return err
 	})
@@ -48,4 +48,3 @@ func main() {
 		log.Fatal(err)
 	}
 }
-

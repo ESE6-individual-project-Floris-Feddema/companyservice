@@ -2,15 +2,15 @@ package routers
 
 import (
 	"companyservice/controllers"
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 func InitRoute() *gin.Engine {
 	router := gin.New()
 
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowMethods = []string{"PUT", "PATCH", "POST", "GET" ,"DELETE"}
+	corsConfig.AllowMethods = []string{"PUT", "PATCH", "POST", "GET", "DELETE"}
 	corsConfig.AllowAllOrigins = true
 
 	router.Use(cors.New(corsConfig))
@@ -30,4 +30,5 @@ func setRoutes(router *gin.Engine) {
 	router.DELETE("/company/:id", companyController.Delete)
 	router.GET("/user/:id", companyController.GetALlUser)
 	router.POST("/user/:id", companyController.AddUser)
+	router.DELETE("/user/:id", companyController.DeleteUser)
 }

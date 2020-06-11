@@ -2,7 +2,7 @@ package repositories
 
 import (
 	. "companyservice/models"
-	. "companyservice/repositories/contexts"
+	.  "companyservice/repositories/contexts"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -103,7 +103,7 @@ func (repository CompanyRepository) FindAllUser(id string) ([]*Company, error) {
 	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
 	collection := GetCollection(ctx)
 
-	filter :=  bson.D{{"$or",
+	filter := bson.D{{"$or",
 		bson.A{
 			bson.D{{"users.userId", id}},
 			bson.D{{"owner.userId", id}},
@@ -165,4 +165,27 @@ func (repository CompanyRepository) UpdateUser(user User) error {
 		return err
 	}
 	return nil
+}
+
+func (repository CompanyRepository) DeleteUser(id primitive.ObjectID, userId string) error {
+	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+	collection := GetCollection(ctx)
+
+	company, err := repository.FindOne(id)
+	if err != nil {
+		return err
+	}
+
+	index := 0
+	for i, n := range company.Users {
+		if userId == n.UserId {
+			index = i
+			break
+		}
+	}
+
+	company.Users = append(company.Users[:index], company.Users[index+1:]...)
+
+	_, err = collection.UpdateOne(ctx, bson.M{"_id": id}, bson.D{{"$set", company}})
+	return err
 }

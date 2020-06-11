@@ -35,7 +35,5 @@ func AddMessagePublisher(connectionUrl string) error {
 	return nil
 }
 
-type MessagePublisher struct {}
-type MessageConsumer struct {}
-
-
+type MessagePublisher struct{}
+type MessageConsumer struct{}

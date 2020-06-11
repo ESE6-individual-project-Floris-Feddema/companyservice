@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func(publisher MessagePublisher) PublishMessageAsync(exchange string, routingKey string, messageType string, message interface{}) error {
+func (publisher MessagePublisher) PublishMessageAsync(exchange string, routingKey string, messageType string, message interface{}) error {
 	connectionFactory := RabbitConnectionFactory{}
 	channel, err := connectionFactory.CreateChannel()
 	if err != nil {
