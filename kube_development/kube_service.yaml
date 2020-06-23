@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: companyservice
+  namespace: plandar-development
+spec:
+  selector:
+    app: companyservice
+  ports:
+  - port: 80
+    targetPort: 80

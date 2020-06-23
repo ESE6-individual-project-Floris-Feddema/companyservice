@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  companyservice:
+    build: .
+    image: companyservice
+    container_name: companyservice
+    restart: unless-stopped
+    ports:
+      - "80:80"
