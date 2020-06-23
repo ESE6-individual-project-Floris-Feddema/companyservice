@@ -206,3 +206,4 @@ config.env
 
 # End of https://www.gitignore.io/api/go,osx,linux,macos,windows,jetbrains,visualstudiocode
 config.development.env
+config.production.env
